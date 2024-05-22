@@ -1,12 +1,6 @@
 class_name MoveState extends PlayerState
 
 
-func _handle_input(_event: InputEvent) -> void:
-	if _event is InputEventKey and _event.is_pressed():
-		if (_event as InputEventKey).keycode == KEY_ENTER:
-			state_machine.transition_to("AttackState")
-
-
 func _physics_update(_delta: float) -> void:
 	var direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
