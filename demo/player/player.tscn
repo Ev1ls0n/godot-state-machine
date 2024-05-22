@@ -1,10 +1,11 @@
-[gd_scene load_steps=59 format=3 uid="uid://cqosywohav41u"]
+[gd_scene load_steps=60 format=3 uid="uid://cqosywohav41u"]
 
 [ext_resource type="Script" path="res://demo/player/player.gd" id="1_3ihvw"]
 [ext_resource type="Texture2D" uid="uid://spgq8o6vvw5k" path="res://demo/player/player_spritesheet.png" id="2_ifqbr"]
 [ext_resource type="Script" path="res://state_machine/state_machine.gd" id="3_p3tlc"]
 [ext_resource type="Script" path="res://demo/player/states/idle_state.gd" id="4_rg56o"]
 [ext_resource type="Script" path="res://demo/player/states/move_state.gd" id="5_4m6q6"]
+[ext_resource type="Script" path="res://demo/player/states/attack_state.gd" id="6_bwmn1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b2x1l"]
 atlas = ExtResource("2_ifqbr")
@@ -225,7 +226,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ckx26")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 6.0
 }, {
@@ -242,7 +243,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hoktv")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 6.0
 }, {
@@ -259,7 +260,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5nua8")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_top",
 "speed": 6.0
 }, {
@@ -426,7 +427,7 @@ script = ExtResource("1_3ihvw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_elnjh")
-animation = &"idle_down"
+animation = &"attack_top"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -442,3 +443,6 @@ script = ExtResource("4_rg56o")
 
 [node name="MoveState" type="Node" parent="StateMachine"]
 script = ExtResource("5_4m6q6")
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("6_bwmn1")
