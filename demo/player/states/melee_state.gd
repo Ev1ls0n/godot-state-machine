@@ -2,16 +2,8 @@ class_name MeleeState extends PlayerState
 
 
 func _enter(_message: Dictionary = {}) -> void:
-	# BUG: Not working for some unknown reason.
-	player.animation_tree["parameters/conditions/is_melee"] = true
-	
+	player.animation_tree["parameters/playback"].travel("Melee")
 	_attack()
-	return
-
-
-func _exit() -> void:
-	# BUG: Not working for some unknown reason.
-	player.animation_tree["parameters/conditions/is_melee"] = false
 	return
 
 

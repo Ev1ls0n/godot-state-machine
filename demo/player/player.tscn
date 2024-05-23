@@ -770,8 +770,6 @@ advance_mode = 2
 advance_condition = &"is_moving"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1sjpr"]
-advance_mode = 2
-advance_condition = &"is_melee"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6n6gh"]
 switch_mode = 2
@@ -779,17 +777,15 @@ advance_mode = 2
 advance_condition = &"is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mfuoc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dds4"]
 advance_mode = 2
-advance_condition = &"is_melee"
+advance_condition = &"is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_midvc"]
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_moving"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dds4"]
-advance_mode = 2
-advance_condition = &"is_idle"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a8vqh"]
 states/End/position = Vector2(670.667, 147.615)
@@ -800,7 +796,7 @@ states/Melee/position = Vector2(430.667, 56.6667)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_p76bm")
 states/Move/position = Vector2(537.333, 145.29)
 states/Start/position = Vector2(214.667, 146.317)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_brv23"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_5cjto"), "Move", "Melee", SubResource("AnimationNodeStateMachineTransition_1sjpr"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_6n6gh"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_mfuoc"), "Melee", "Move", SubResource("AnimationNodeStateMachineTransition_midvc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3dds4")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_brv23"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_5cjto"), "Move", "Melee", SubResource("AnimationNodeStateMachineTransition_1sjpr"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_6n6gh"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_mfuoc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3dds4"), "Melee", "Move", SubResource("AnimationNodeStateMachineTransition_midvc")]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 motion_mode = 1
@@ -809,7 +805,7 @@ script = ExtResource("1_3ihvw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_elnjh")
 animation = &"idle_top"
-frame = 4
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -836,18 +832,19 @@ script = ExtResource("6_6bnoq")
 script = ExtResource("7_k12lf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_hkiea")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_hkiea")
 }
 tree_root = SubResource("AnimationNodeStateMachine_a8vqh")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = true
-parameters/conditions/is_melee = false
 parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0, 0)
 parameters/Melee/blend_position = Vector2(0, 0)
