@@ -2,19 +2,20 @@ class_name MeleeState extends PlayerState
 
 
 func _enter(_message: Dictionary = {}) -> void:
+	# BUG: Not working for some unknown reason.
+	player.animation_tree["parameters/conditions/is_melee"] = true
+	
 	_attack()
 	return
 
 
-func _update(_delta: float) -> void:
-	player.just_flip_h(player.look_direction)
+func _exit() -> void:
+	# BUG: Not working for some unknown reason.
+	player.animation_tree["parameters/conditions/is_melee"] = false
 	return
 
 
 func _attack() -> void:
-	player.set_directional_animation(player.look_direction, player.DirectionalAnimations.ATTACK)
-	player.is_animation_locked = true
-	await player.animated_sprite.animation_finished
-	player.is_animation_locked = false
+	player.set_animation_direction(player.look_direction)
 	state_machine.transition_to("StandbyState")
 	return

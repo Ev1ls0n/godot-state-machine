@@ -1,49 +1,30 @@
 class_name PlayerCharacter extends CharacterBody2D
 
 
-enum DirectionalAnimations {IDLE, MOVE, ATTACK}
-
-
 var look_direction: Vector2 = Vector2.DOWN
 var movement_speed: float = 100.0
-var is_animation_locked: bool = false
 
 @onready var animated_sprite := get_node("AnimatedSprite2D") as AnimatedSprite2D
-@onready var movement_state_machine := get_node("MovementStateMachine") as StateMachine
-@onready var combat_state_machine := get_node("CombatStateMachine") as StateMachine
+@onready var animation_tree := get_node("AnimationTree") as AnimationTree
 
 
-func set_directional_animation(direction: Vector2, animation_set: DirectionalAnimations) -> void:
-	if not is_animation_locked:
-		var current_animation_set: Dictionary = _get_animation_set(animation_set)
-		if (direction.x != 0 and direction.y == 0):
-			animated_sprite.animation = current_animation_set["right"]
-			animated_sprite.flip_h = direction.x < 0
-		elif (direction.y < 0):
-			animated_sprite.animation = current_animation_set["top"]
-			animated_sprite.flip_h = false
-		elif (direction.y > 0):
-			animated_sprite.animation = current_animation_set["down"]
-			animated_sprite.flip_h = false
-	
-	if not animated_sprite.is_playing():
-		animated_sprite.play()
-	
+# NOTE: I have no idea why changing the animator parameters doesn't work in the melee state code.
+# WARNING: _transition_to_next_recursive: AnimationNodeStateMachinePlayback:
+# parameters/playback aborts the transition by detecting one or more looped transitions
+# in the same frame to prevent to infinity loop. You may need to check the transition settings.
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		animation_tree["parameters/conditions/is_melee"] = true
+	elif event.is_action_released("ui_accept"):
+		animation_tree["parameters/conditions/is_melee"] = false
 	return
 
 
-func just_flip_h(direction: Vector2) -> void:
+func set_animation_direction(direction: Vector2) -> void:
+	animation_tree["parameters/Melee/blend_position"] = direction
+	animation_tree["parameters/Idle/blend_position"] = direction
+	animation_tree["parameters/Move/blend_position"] = direction
+	
+	# BUG: If you constantly flip the sprite, the animation will play infinitely.
 	animated_sprite.flip_h = direction.x < 0
 	return
-
-
-func _get_animation_set(animation_set: DirectionalAnimations) -> Dictionary:
-	var result: Dictionary
-	match animation_set:
-		DirectionalAnimations.IDLE:
-			result = {"right":"idle_right", "top":"idle_top", "down":"idle_down"}
-		DirectionalAnimations.MOVE:
-			result = {"right":"move_right", "top":"move_top", "down":"move_down"}
-		DirectionalAnimations.ATTACK:
-			result = {"right":"attack_right", "top":"attack_top", "down":"attack_down"}
-	return result

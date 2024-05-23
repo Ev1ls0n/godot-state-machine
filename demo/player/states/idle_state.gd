@@ -2,8 +2,13 @@ class_name IdleState extends PlayerState
 
 
 func _enter(_message: Dictionary = {}) -> void:
-	player.velocity = Vector2.ZERO
-	player.set_directional_animation(player.look_direction, player.DirectionalAnimations.IDLE)
+	player.animation_tree["parameters/conditions/is_idle"] = true
+	player.set_animation_direction(player.look_direction)
+	return
+
+
+func _exit() -> void:
+	player.animation_tree["parameters/conditions/is_idle"] = false
 	return
 
 
