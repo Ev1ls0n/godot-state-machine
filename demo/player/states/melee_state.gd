@@ -2,7 +2,7 @@ class_name MeleeState extends PlayerState
 
 
 func _enter(_message: Dictionary = {}) -> void:
-	player.animation_tree["parameters/playback"].travel("Melee")
+	player.animation_playback.travel("Melee")
 	_attack()
 	return
 

@@ -3,6 +3,7 @@ class_name IdleState extends PlayerState
 
 func _enter(_message: Dictionary = {}) -> void:
 	player.animation_tree["parameters/conditions/is_idle"] = true
+	player.animation_playback.travel("Idle")
 	player.set_animation_direction(player.look_direction)
 	return
 

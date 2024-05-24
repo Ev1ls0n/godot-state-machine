@@ -737,7 +737,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_wtvrm")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_lqtl2")
 blend_point_3/pos = Vector2(-1, 0)
-blend_mode = 1
+sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7p2vo"]
 animation = &"move_right"
@@ -766,37 +766,33 @@ blend_mode = 1
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5cjto"]
-advance_mode = 2
-advance_condition = &"is_moving"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1sjpr"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6n6gh"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mfuoc"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3dds4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3hr3m"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_66g04"]
+switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_midvc"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aq87v"]
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_moving"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a8vqh"]
-states/End/position = Vector2(670.667, 147.615)
+states/End/position = Vector2(701.334, 146.252)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_yew14")
 states/Idle/position = Vector2(336, 147.593)
 states/Melee/node = SubResource("AnimationNodeBlendSpace2D_ea2bh")
-states/Melee/position = Vector2(430.667, 56.6667)
+states/Melee/position = Vector2(429.482, 44.6667)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_p76bm")
-states/Move/position = Vector2(537.333, 145.29)
+states/Move/position = Vector2(532, 147.508)
 states/Start/position = Vector2(214.667, 146.317)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_brv23"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_5cjto"), "Move", "Melee", SubResource("AnimationNodeStateMachineTransition_1sjpr"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_6n6gh"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_mfuoc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3dds4"), "Melee", "Move", SubResource("AnimationNodeStateMachineTransition_midvc")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_brv23"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_5cjto"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_mfuoc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3dds4"), "Move", "Melee", SubResource("AnimationNodeStateMachineTransition_3hr3m"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_66g04"), "Melee", "Move", SubResource("AnimationNodeStateMachineTransition_aq87v")]
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 motion_mode = 1
@@ -804,8 +800,8 @@ script = ExtResource("1_3ihvw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_elnjh")
-animation = &"idle_top"
-frame = 2
+animation = &"move_right"
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -847,5 +843,5 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = true
 parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0, 0)
-parameters/Melee/blend_position = Vector2(0, 0)
+parameters/Melee/blend_position = Vector2(-0.326087, 0.446043)
 parameters/Move/blend_position = Vector2(0, 0)

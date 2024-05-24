@@ -3,6 +3,7 @@ class_name MoveState extends PlayerState
 
 func _enter(_message: Dictionary = {}) -> void:
 	player.animation_tree["parameters/conditions/is_moving"] = true
+	player.animation_playback.travel("Move")
 	return
 
 
