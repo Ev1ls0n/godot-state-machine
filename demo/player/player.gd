@@ -3,6 +3,7 @@ class_name PlayerCharacter extends CharacterBody2D
 
 var look_direction: Vector2 = Vector2.DOWN
 var movement_speed: float = 100.0
+var can_move: bool = true
 
 var animation_playback: AnimationNodeStateMachinePlayback
 

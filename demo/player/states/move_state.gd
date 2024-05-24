@@ -15,7 +15,7 @@ func _exit() -> void:
 func _physics_update(_delta: float) -> void:
 	var direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
-	if direction:
+	if direction and player.can_move:
 		player.look_direction = direction
 		player.velocity = direction * player.movement_speed
 		player.move_and_slide()

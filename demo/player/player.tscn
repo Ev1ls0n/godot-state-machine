@@ -788,11 +788,12 @@ states/End/position = Vector2(701.334, 146.252)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_yew14")
 states/Idle/position = Vector2(336, 147.593)
 states/Melee/node = SubResource("AnimationNodeBlendSpace2D_ea2bh")
-states/Melee/position = Vector2(429.482, 44.6667)
+states/Melee/position = Vector2(425.35, 55.3334)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_p76bm")
 states/Move/position = Vector2(532, 147.508)
 states/Start/position = Vector2(214.667, 146.317)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_brv23"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_5cjto"), "Idle", "Melee", SubResource("AnimationNodeStateMachineTransition_mfuoc"), "Move", "Idle", SubResource("AnimationNodeStateMachineTransition_3dds4"), "Move", "Melee", SubResource("AnimationNodeStateMachineTransition_3hr3m"), "Melee", "Idle", SubResource("AnimationNodeStateMachineTransition_66g04"), "Melee", "Move", SubResource("AnimationNodeStateMachineTransition_aq87v")]
+graph_offset = Vector2(0, 30.0603)
 
 [node name="PlayerCharacter" type="CharacterBody2D"]
 motion_mode = 1
@@ -800,8 +801,7 @@ script = ExtResource("1_3ihvw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_elnjh")
-animation = &"move_right"
-frame = 4
+animation = &"idle_top"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -843,5 +843,5 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = true
 parameters/conditions/is_moving = false
 parameters/Idle/blend_position = Vector2(0, 0)
-parameters/Melee/blend_position = Vector2(-0.326087, 0.446043)
+parameters/Melee/blend_position = Vector2(0, 0)
 parameters/Move/blend_position = Vector2(0, 0)
