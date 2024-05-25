@@ -7,7 +7,7 @@ var can_move: bool = true
 
 var animation_playback: AnimationNodeStateMachinePlayback
 
-@onready var animated_sprite := get_node("AnimatedSprite2D") as AnimatedSprite2D
+@onready var sprite := get_node("Sprite2D") as Sprite2D
 @onready var animation_tree := get_node("AnimationTree") as AnimationTree
 
 
@@ -20,5 +20,5 @@ func set_animation_direction(direction: Vector2) -> void:
 	animation_tree["parameters/Melee/blend_position"] = direction
 	animation_tree["parameters/Idle/blend_position"] = direction
 	animation_tree["parameters/Move/blend_position"] = direction
-	animated_sprite.flip_h = direction.x < 0
+	sprite.flip_h = direction.x < 0
 	return
